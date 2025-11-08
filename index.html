@@ -13,7 +13,7 @@
     <div id="game-container">
         <header>
             <h1>معمل الكيمياء التفاعلي</h1>
-            <p id="level-info">المستوى: 1 - المزج البسيط</p>
+            <p id="level-info">المركبات المكتشفة: 0 / 12</p>
         </header>
 
         <!-- منطقة المرشد والتفاعل الرئيسي -->
@@ -22,31 +22,34 @@
             <div id="sensei-area">
                 <img src="sensei.png" alt="المرشد الكيميائي" id="sensei-img">
                 <div id="sensei-speech-bubble">
-                    مرحبًا يا كيميائي! اسحب العنصرين إلى منطقة المزج لترى ماذا يحدث.
+                    مرحبًا يا كيميائي! اسحب أي عنصرين إلى منطقة المزج واكتشف ماذا يحدث.
                 </div>
             </div>
 
             <!-- منطقة اللعب المركزية -->
             <div id="play-area">
-                <!-- منطقة العناصر المتاحة -->
-                <section id="elements-area">
-                    <h2>العناصر المتاحة</h2>
-                    <div id="elements-container">
-                        <!-- العناصر ستتم إضافتها هنا بواسطة JavaScript -->
-                    </div>
-                </section>
+                <!-- --- القسم الجديد: منطقة التجربة (العناصر والمزج جنباً إلى جنب) --- -->
+                <div id="experiment-area">
+                    <!-- منطقة العناصر المتاحة -->
+                    <section id="elements-area">
+                        <h2>العناصر المتاحة</h2>
+                        <div id="elements-container">
+                            <!-- العناصر ستتم إضافتها هنا بواسطة JavaScript -->
+                        </div>
+                    </section>
 
-                <!-- منطقة المزج -->
-                <section id="mixer-area">
-                    <h2>منطقة المزج</h2>
-                    <div id="mixer-tube">
-                        <div id="mixed-result"></div>
-                        <p>اسقط العناصر هنا</p>
-                    </div>
-                    <button id="mix-button" disabled>مزج الآن!</button>
-                </section>
+                    <!-- منطقة المزج -->
+                    <section id="mixer-area">
+                        <h2>منطقة المزج</h2>
+                        <div id="mixer-tube">
+                            <div id="mixed-result"></div>
+                            <p>اسقط العناصر هنا</p>
+                        </div>
+                        <button id="mix-button" disabled>مزج الآن!</button>
+                    </section>
+                </div>
 
-                <!-- منطقة السؤال والاختيارات -->
+                <!-- منطقة السؤال والاختيارات (تحت منطقة التجربة) -->
                 <section id="question-area" style="display: none;">
                     <h2>ما اسم المركب الناتج؟</h2>
                     <div id="choices-container">
