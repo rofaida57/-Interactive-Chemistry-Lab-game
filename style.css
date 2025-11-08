@@ -1,8 +1,8 @@
 /* إعدادات عامة */
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
 
+/* --- لوحة ألوان جديدة ومتناسقة --- */
 :root {
-    /* --- لوحة ألوان جديدة ومتناسقة --- */
     --bg-primary: #1a1a2e;       /* خلفية داكنة زرقاء داكنة */
     --bg-secondary: #16213e;     /* خلفية ثانوية أفتح قليلاً */
     --bg-card: #0f3460;          /* خلفية البطاقات (العناصر، المزج) */
@@ -61,7 +61,7 @@ header h1 {
 }
 
 #sensei-area {
-    flex: 1; /* يأخذ مساحة متساوية */
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -69,9 +69,9 @@ header h1 {
 }
 
 #play-area {
-    flex: 2; /* يأخذ ضعف المساحة */
+    flex: 2;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* لا يزال التدفق العام عموديًا */
     gap: 20px;
 }
 
@@ -119,14 +119,24 @@ header h1 {
     color: var(--text-primary);
     border-bottom: 2px solid var(--accent-color);
     padding-bottom: 10px;
+    text-align: center;
 }
 
+/* --- التعديل الرئيسي هنا: منطقة التجربة الأفقية --- */
+#experiment-area {
+    display: flex; /* تفعيل Flexbox */
+    justify-content: space-around; /* توزيع المسافات بين العناصر */
+    align-items: flex-start; /* محاذاة الأقسام من الأعلى */
+    gap: 30px; /* مسافة بين منطقة العناصر ومنطقة المزج */
+}
+
+/* منطقة العناصر داخل التخطيط الأفقي */
 #elements-container {
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-top: 15px;
-    flex-wrap: wrap; /* للسماح بالالتفاف على الشاشات الصغيرة */
+    flex-wrap: wrap; /* السماح بالالتفاف إذا ضاقت المساحة */
 }
 
 .element-tube {
@@ -168,16 +178,23 @@ header h1 {
     font-size: 1.2em;
 }
 
-/* منطقة المزج */
+/* منطقة المزج داخل التخطيط الأفقي */
+#mixer-area {
+    /* إضافة مساحة أكبر لجعلها مركز التركيز */
+    padding: 30px 20px;
+    border: 2px dashed var(--accent-color); /* إضافة حدود متقطعة لجذب الانتباه */
+    text-align: center; /* توسيط محتوياتها */
+}
+
 #mixer-tube {
-    width: 100px;
-    height: 180px;
+    width: 120px;
+    height: 200px;
     border: 3px solid var(--text-primary);
     border-radius: 15px;
-    margin: 15px auto;
+    margin: 15px auto; /* توسيط الأنبوب داخل قسمه */
     position: relative;
     background-color: rgba(255, 255, 255, 0.05);
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 0 20px rgba(233, 69, 96, 0.3); /* إضافة توهج خفيف */
 }
 
 #mixed-result {
@@ -225,7 +242,7 @@ header h1 {
     transform: none;
 }
 
-/* منطقة الاختيارات */
+/* منطقة الاختيارات (تبقى كما هي، وتكون تحت #experiment-area) */
 #choices-container {
     display: flex;
     justify-content: center;
