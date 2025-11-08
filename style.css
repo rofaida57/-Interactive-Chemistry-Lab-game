@@ -1,59 +1,63 @@
 /* إعدادات عامة */
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
 
-/* --- لوحة ألوان جديدة ومتناسقة --- */
+/* --- لوحة ألوان بسيطة ومحفزة --- */
 :root {
-    --bg-primary: #1a1a2e;       /* خلفية داكنة زرقاء داكنة */
-    --bg-secondary: #16213e;     /* خلفية ثانوية أفتح قليلاً */
-    --bg-card: #0f3460;          /* خلفية البطاقات (العناصر، المزج) */
-    --text-primary: #eee;        /* النص الأساسي (أبيض باهت) */
-    --text-secondary: #a8a8a8;   /* النص الثانوي (رمادي) */
-    --accent-color: #e94560;     /* اللون الرئيسي للتفاعلات (أحمر وردي) */
-    --accent-hover: #c13651;     /* لون عند التمرير */
-    --success-color: #4caf50;    /* لون النجاح */
-    --error-color: #f44336;      /* لون الخطأ */
-    --sensei-bubble: #f5f5f5;    /* فقاعة المرشد */
-    --sensei-text: #333;         /* نص فقاعة المرشد */
+    --bg-main: #f0f8ff;      /* خلفية رئيسية زرقاء فاتحة جدًا */
+    --bg-white: #ffffff;     /* أبيض نقي للبطاقات */
+    --primary-blue: #007bff; /* أزرق أساسي */
+    --primary-green: #28a745;/* أخضر أساسي */
+    --text-dark: #343a40;    /* نص داكن */
+    --text-light: #6c757d;   /* نص ثانوي باهت */
+    --border-color: #dee2e6; /* لون الحدود */
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --tube-shadow: inset 0 -5px 10px rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.15); /* ظل داخلي وخارجي للأنبوب */
 }
 
 body {
     font-family: 'Tajawal', sans-serif;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    background-color: var(--bg-main);
+    color: var(--text-dark);
     margin: 0;
     padding: 20px;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* --- إضافة صورة الخلفية --- */
+    background-image: url('lab-bg.jpg');
+    background-size: cover; /* لتغطية كامل الشاشة */
+    background-position: center; /* لتوسيط الصورة */
+    background-attachment: fixed; /* لجعل الخلفية ثابتة عند التمرير */
 }
 
 #game-container {
-    background-color: var(--bg-secondary);
-    border-radius: 15px;
-    padding: 20px;
-    max-width: 1200px; /* زيادة العرض الأقصى */
+    background-color: rgba(255, 255, 255, 0.92); /* خلفية بيضاء شفافة قليلاً */
+    border-radius: 12px;
+    padding: 25px 40px;
+    max-width: 1000px;
     width: 100%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* ظل أقوى للبروز فوق الخلفية */
+    border: 1px solid var(--border-color);
 }
 
 header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
 }
 
 header h1 {
     margin: 0;
-    font-size: 2.5em;
-    color: var(--accent-color);
+    font-size: 2.2em;
+    color: var(--primary-blue);
 }
 
 #level-info {
-    font-size: 1.2em;
-    color: var(--text-secondary);
+    font-size: 1em;
+    color: var(--text-light);
+    margin-top: 5px;
 }
 
-/* --- التخطيط الجديد لصفحة واحدة --- */
+/* --- التخطيط الرئيسي --- */
 #game-main-area {
     display: flex;
     gap: 30px;
@@ -62,149 +66,192 @@ header h1 {
 
 #sensei-area {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     text-align: center;
+    padding: 20px;
+    background-color: rgba(240, 248, 255, 0.7); /* خلفية شفافة لمنطقة المرشد */
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
 }
 
 #play-area {
-    flex: 2;
+    flex: 3;
     display: flex;
-    flex-direction: column; /* لا يزال التدفق العام عموديًا */
+    flex-direction: column;
     gap: 20px;
 }
 
-/* منطقة المرشد */
+/* --- منطقة المرشد --- */
 #sensei-img {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    border: 3px solid var(--accent-color);
+    border: 3px solid var(--primary-blue);
     margin-bottom: 15px;
 }
 
 #sensei-speech-bubble {
-    background-color: var(--sensei-bubble);
-    color: var(--sensei-text);
-    padding: 15px 25px;
-    border-radius: 20px;
-    position: relative;
-    font-size: 1.1em;
-    max-width: 300px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--primary-blue);
+    font-size: 1em;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
 }
 
-#sensei-speech-bubble::before {
-    content: '';
-    position: absolute;
-    top: -15px; /* اتجاه السهم للأعلى */
-    right: 50%;
-    transform: translateX(50%);
-    border-width: 0 15px 15px 15px;
-    border-color: transparent transparent var(--sensei-bubble) transparent;
-    border-style: solid;
-}
-
-/* مناطق اللعب */
+/* --- مناطق اللعب --- */
 #elements-area, #mixer-area, #question-area {
-    background-color: var(--bg-card);
+    background-color: rgba(255, 255, 255, 0.8); /* خلفية شفافة */
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow);
 }
 
 #elements-area h2, #mixer-area h2, #question-area h2 {
     margin-top: 0;
-    color: var(--text-primary);
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 10px;
+    margin-bottom: 15px;
+    color: var(--primary-blue);
     text-align: center;
+    font-size: 1.3em;
 }
 
-/* --- التعديل الرئيسي هنا: منطقة التجربة الأفقية --- */
+/* --- منطقة التجربة الأفقية --- */
 #experiment-area {
-    display: flex; /* تفعيل Flexbox */
-    justify-content: space-around; /* توزيع المسافات بين العناصر */
-    align-items: flex-start; /* محاذاة الأقسام من الأعلى */
-    gap: 30px; /* مسافة بين منطقة العناصر ومنطقة المزج */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
 }
 
-/* منطقة العناصر داخل التخطيط الأفقي */
+/* --- العناصر (كأنابيب) --- */
 #elements-container {
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
-    flex-wrap: wrap; /* السماح بالالتفاف إذا ضاقت المساحة */
+    flex-direction: column;
+    gap: 20px; /* مسافة أكبر بين الأنابيب */
+    align-items: center;
 }
 
 .element-tube {
     width: 70px;
-    height: 120px;
-    border-radius: 10px;
-    border: 2px solid var(--text-primary);
+    height: 150px;
     cursor: grab;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    padding-bottom: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
     position: relative;
+    user-select: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* --- شكل الأنبوب باستخدام CSS --- */
+.element-tube::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, var(--primary-blue), #0056b3); /* تدرج لوني */
+    border-radius: 0 0 35px 35px; /* قاعدة مستديرة */
+    border: 2px solid #004085; /* حدود داكنة */
+    box-shadow: var(--tube-shadow);
+    z-index: 1;
+}
+
+/* -- فتحة الأنبوب في الأعلى -- */
+.element-tube::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 15px;
+    background: linear-gradient(to bottom, #004085, var(--primary-blue));
+    border-radius: 5px 5px 0 0;
+    border: 2px solid #004085;
+    border-bottom: none;
+    z-index: 0;
+}
+
+.element-tube .element-name {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    color: var(--bg-white);
+    font-weight: bold;
+    font-size: 1.4em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* ظل للنص ليظهر بوضوح */
+    z-index: 2; /* ليكون فوق الأنبوب */
 }
 
 .element-tube:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px var(--accent-color);
+    transform: translateY(-5px) scale(1.05);
 }
 
 .element-tube.ui-draggable-dragging {
     cursor: grabbing;
     transform: rotate(5deg) scale(1.1);
     z-index: 1000;
-    box-shadow: 0 0 20px var(--accent-color);
+    opacity: 0.9;
 }
 
-.element-tube .element-name {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: var(--text-primary);
-    padding: 5px;
-    border-radius: 5px;
-    font-weight: bold;
-    width: 90%;
-    text-align: center;
-    font-size: 1.2em;
-}
-
-/* منطقة المزج داخل التخطيط الأفقي */
+/* --- منطقة المزج (كأنبوب كبير) --- */
 #mixer-area {
-    /* إضافة مساحة أكبر لجعلها مركز التركيز */
-    padding: 30px 20px;
-    border: 2px dashed var(--accent-color); /* إضافة حدود متقطعة لجذب الانتباه */
-    text-align: center; /* توسيط محتوياتها */
+    text-align: center;
+    flex-grow: 1;
 }
 
 #mixer-tube {
     width: 120px;
-    height: 200px;
-    border: 3px solid var(--text-primary);
-    border-radius: 15px;
-    margin: 15px auto; /* توسيط الأنبوب داخل قسمه */
+    height: 220px;
+    margin: 15px auto;
     position: relative;
-    background-color: rgba(255, 255, 255, 0.05);
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 0 20px rgba(233, 69, 96, 0.3); /* إضافة توهج خفيف */
+    cursor: default;
+}
+
+#mixer-tube::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, #e9ecef, #ced4da); /* تدرج رمادي */
+    border-radius: 0 0 50px 50px; /* قاعدة مستديرة أكبر */
+    border: 3px dashed var(--primary-blue); /* حدود متقطعة زرقاء */
+    box-shadow: var(--tube-shadow);
+    z-index: 1;
+}
+
+#mixer-tube::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 18px;
+    background: linear-gradient(to bottom, var(--border-color), #e9ecef);
+    border-radius: 8px 8px 0 0;
+    border: 3px dashed var(--primary-blue);
+    border-bottom: none;
+    z-index: 0;
 }
 
 #mixed-result {
     position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
+    left: 10px; /* ترك مساحة للحدود */
+    right: 10px;
     height: 0%;
-    border-radius: 0 0 12px 12px;
-    transition: height 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    background: linear-gradient(to top, var(--primary-green), #5cb85c); /* تدرج أخضر عند المزج */
+    border-radius: 0 0 40px 40px; /* يتبع شكل قاعدة الأنبوب */
+    transition: height 0.5s ease-in-out;
+    z-index: 2; /* ليكون فوق الأنبوب الرمادي */
 }
 
 #mixer-tube p {
@@ -212,86 +259,87 @@ header h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--text-secondary);
+    color: var(--text-light);
     font-size: 0.9em;
+    z-index: 3; /* ليكون فوق كل شيء */
 }
 
 #mix-button {
-    background-color: var(--accent-color);
-    color: var(--text-primary);
+    background-color: var(--primary-green);
+    color: var(--bg-white);
     border: none;
-    padding: 12px 35px;
-    font-size: 1.2em;
+    padding: 12px 30px;
+    font-size: 1.1em;
     border-radius: 25px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
     font-family: 'Tajawal', sans-serif;
     font-weight: bold;
-    display: block;
-    margin: 0 auto;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 #mix-button:hover:not(:disabled) {
-    background-color: var(--accent-hover);
-    transform: translateY(-2px);
+    background-color: #218838;
+    transform: scale(1.05);
 }
 
 #mix-button:disabled {
-    background-color: var(--text-secondary);
+    background-color: var(--text-light);
     cursor: not-allowed;
-    transform: none;
+    transform: scale(1);
 }
 
-/* منطقة الاختيارات (تبقى كما هي، وتكون تحت #experiment-area) */
+/* --- منطقة السؤال والاختيارات (تبقى كما هي) --- */
 #choices-container {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 15px;
     flex-wrap: wrap;
 }
 
 .choice-button {
-    background-color: var(--bg-secondary);
-    color: var(--text-primary);
-    border: 2px solid var(--accent-color);
-    padding: 15px 25px;
-    font-size: 1.1em;
-    border-radius: 10px;
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+    border: 2px solid var(--primary-blue);
+    padding: 12px 25px;
+    font-size: 1em;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s;
     font-family: 'Tajawal', sans-serif;
     font-weight: bold;
+    transition: all 0.3s ease-in-out;
 }
 
 .choice-button:hover {
-    background-color: var(--accent-color);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+    background-color: var(--primary-blue);
+    color: var(--bg-white);
+    transform: translateY(-2px);
 }
 
 .choice-button.correct {
-    background-color: var(--success-color);
-    border-color: var(--success-color);
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+    color: var(--bg-white);
     animation: pulse 0.6s;
-    pointer-events: none; /* منع النقر بعد الاختيار */
+    pointer-events: none;
 }
 
 .choice-button.incorrect {
-    background-color: var(--error-color);
-    border-color: var(--error-color);
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: var(--bg-white);
     animation: shake 0.5s;
-    pointer-events: none; /* منع النقر بعد الاختيار */
+    pointer-events: none;
 }
 
+/* --- رسوم متحركة --- */
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    50% { transform: scale(1.08); }
     100% { transform: scale(1); }
 }
 
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
 }
