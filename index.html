@@ -1,65 +1,57 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>معمل الكيمياء التفاعلي</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-    <div id="game-container">
+    <div id="game-container" role="main" aria-label="معمل الكيمياء التفاعلي">
         <header>
-            <h1>معمل الكيمياء التفاعلي</h1>
-            <p id="level-info">المركبات المكتشفة: 0 / 12</p>
+            <h1 tabindex="0">معمل الكيمياء التفاعلي</h1>
+            <p id="level-info" aria-live="polite" tabindex="0">المركبات المكتشفة: 0 / 12</p>
         </header>
 
-        <!-- منطقة المرشد والتفاعل الرئيسي -->
         <main id="game-main-area">
-            <!-- منطقة الشخصية الانمي -->
-            <div id="sensei-area">
-                <img src="_Squid Game Circle Mask Soldier _ Netflix TV Series_ Sticker for Sale by Inthepaper-.jpeg" alt="المرشد الكيميائي" id="sensei-img">
-                <div id="sensei-speech-bubble">
+            <section id="sensei-area" aria-label="المرشد الكيميائي">
+                <img src="sensei.png" alt="المرشد الكيميائي" id="sensei-img" />
+                <div id="sensei-speech-bubble" role="alert" aria-live="polite" tabindex="0">
                     مرحبًا يا كيميائي! اسحب أي عنصرين إلى منطقة المزج واكتشف ماذا يحدث.
                 </div>
-            </div>
+            </section>
 
-            <!-- منطقة اللعب المركزية -->
-            <div id="play-area">
-                <!-- --- القسم الجديد: منطقة التجربة (العناصر والمزج جنباً إلى جنب) --- -->
-                <div id="experiment-area">
-                    <!-- منطقة العناصر المتاحة -->
-                    <section id="elements-area">
-                        <h2>العناصر المتاحة</h2>
-                        <div id="elements-container">
-                            <!-- العناصر ستتم إضافتها هنا بواسطة JavaScript -->
-                        </div>
+            <section id="play-area" aria-label="منطقة اللعب">
+                <div id="experiment-area" aria-label="منطقة التجربة">
+                    <section id="elements-area" aria-label="العناصر المتاحة">
+                        <h2 tabindex="0">العناصر المتاحة</h2>
+                        <div id="elements-container"></div>
                     </section>
 
-                    <!-- منطقة المزج -->
-                    <section id="mixer-area">
-                        <h2>منطقة المزج</h2>
-                        <div id="mixer-tube">
+                    <section id="mixer-area" aria-label="منطقة المزج">
+                        <h2 tabindex="0">منطقة المزج</h2>
+                        <div id="mixer-tube" aria-dropeffect="move" aria-label="أنبوب المزج">
                             <div id="mixed-result"></div>
                             <p>اسقط العناصر هنا</p>
                         </div>
-                        <button id="mix-button" disabled>مزج الآن!</button>
+                        <button id="mix-button" disabled aria-disabled="true" aria-label="زر مزج العناصر">مزج الآن!</button>
                     </section>
                 </div>
 
-                <!-- منطقة السؤال والاختيارات (تحت منطقة التجربة) -->
-                <section id="question-area" style="display: none;">
-                    <h2>ما اسم المركب الناتج؟</h2>
-                    <div id="choices-container">
-                        <!-- الخيارات ستتم إضافتها هنا بواسطة JavaScript -->
-                    </div>
+                <section id="question-area" aria-label="سؤال المركب الناتج">
+                    <h2 tabindex="0">ما اسم المركب الناتج؟</h2>
+                    <div id="choices-container" role="radiogroup" aria-live="polite"></div>
                 </section>
-            </div>
+            </section>
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>
+
