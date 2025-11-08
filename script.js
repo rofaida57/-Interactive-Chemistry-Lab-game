@@ -1,345 +1,180 @@
-/* إعدادات عامة */
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+ $(document).ready(function() {
 
-/* --- لوحة ألوان بسيطة ومحفزة --- */
-:root {
-    --bg-main: #f0f8ff;      /* خلفية رئيسية زرقاء فاتحة جدًا */
-    --bg-white: #ffffff;     /* أبيض نقي للبطاقات */
-    --primary-blue: #007bff; /* أزرق أساسي */
-    --primary-green: #28a745;/* أخضر أساسي */
-    --text-dark: #343a40;    /* نص داكن */
-    --text-light: #6c757d;   /* نص ثانوي باهت */
-    --border-color: #dee2e6; /* لون الحدود */
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    --tube-shadow: inset 0 -5px 10px rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.15); /* ظل داخلي وخارجي للأنبوب */
-}
+    // --- قاعدة البيانات الموسعة (لم يتم تغييرها) ---
+    const chemicalData = {
+        elements: [
+            { id: 'Li', name: 'ليثيوم', symbol: 'Li', color: '#ff8080' }, { id: 'Na', name: 'صوديوم', symbol: 'Na', color: '#ffffcc' },
+            { id: 'K', name: 'بوتاسيوم', symbol: 'K', color: '#b3ffb3' }, { id: 'Mg', name: 'مغنيسيوم', symbol: 'Mg', color: '#ccffcc' },
+            { id: 'Ca', name: 'كالسيوم', symbol: 'Ca', color: '#e6ffe6' }, { id: 'F', name: 'فلور', symbol: 'F', color: '#ccffff' },
+            { id: 'Cl', name: 'كلور', symbol: 'Cl', color: '#ccffcc' }, { id: 'Br', name: 'بروم', symbol: 'Br', color: '#ffe6cc' },
+            { id: 'I', name: 'يود', symbol: 'I', color: '#e6ccff' }, { id: 'H', name: 'هيدروجين', symbol: 'H', color: '#ffcccc' },
+            { id: 'He', name: 'هيليوم', symbol: 'He', color: '#ffb3ff' }, { id: 'C', name: 'كربون', symbol: 'C', color: '#d9d9d9' },
+            { id: 'N', name: 'نيتروجين', symbol: 'N', color: '#b3d9ff' }, { id: 'O', name: 'أكسجين', symbol: 'O', color: '#cce5ff' },
+            { id: 'Si', name: 'سيليكون', symbol: 'Si', color: '#e6e6e6' }, { id: 'P', name: 'فوسفور', symbol: 'P', color: '#ffcc99' },
+            { id: 'S', name: 'كبريت', symbol: 'S', color: '#ffff99' }, { id: 'Fe', name: 'حديد', symbol: 'Fe', color: '#e67373' },
+            { id: 'Cu', name: 'نحاس', symbol: 'Cu', color: '#b87333' }, { id: 'Zn', name: 'زنك', symbol: 'Zn', color: '#a6a6a6' },
+            { id: 'Ag', name: 'فضة', symbol: 'Ag', color: '#c0c0c0' }, { id: 'Au', name: 'ذهب', symbol: 'Au', color: '#ffd700' },
+        ],
+        compounds: [
+            { resultId: 'NaCl', name: 'كلوريد الصوديوم (ملح الطعام)', formula: 'NaCl', color: '#ffffff', reactants: ['Na', 'Cl'], wrongChoices: ['بروميد الصوديوم', 'فلوريد الصوديوم'] },
+            { resultId: 'H2O', name: 'ماء', formula: 'H₂O', color: '#80dfff', reactants: ['H', 'O'], wrongChoices: ['بيروكسيد الهيدروجين', 'أوزون'] },
+            { resultId: 'CO2', name: 'ثاني أكسيد الكربون', formula: 'CO₂', color: '#f0f0f0', reactants: ['C', 'O'], wrongChoices: ['أول أكسيد الكربون', 'حمض الكربونيك'] },
+            { resultId: 'NaF', name: 'فلوريد الصوديوم', formula: 'NaF', color: '#e6ffff', reactants: ['Na', 'F'], wrongChoices: ['كلوريد الصوديوم', 'أكسيد الصوديوم'] },
+            { resultId: 'KBr', name: 'بروميد البوتاسيوم', formula: 'KBr', color: '#f2e6d9', reactants: ['K', 'Br'], wrongChoices: ['يوديد البوتاسيوم', 'كلوريد البوتاسيوم'] },
+            { resultId: 'MgO', name: 'أكسيد المغنيسيوم', formula: 'MgO', color: '#f5f5dc', reactants: ['Mg', 'O'], wrongChoices: ['هيدروكسيد المغنيسيوم', 'كربونات المغنيسيوم'] },
+            { resultId: 'CaO', name: 'أكسيد الكالسيوم (الجير الحي)', formula: 'CaO', color: '#ffffff', reactants: ['Ca', 'O'], wrongChoices: ['كربونات الكالسيوم', 'هيدروكسيد الكالسيوم'] },
+            { resultId: 'Fe2O3', name: 'أكسيد الحديد (III) (صدأ)', formula: 'Fe₂O₃', color: '#8b4513', reactants: ['Fe', 'O'], wrongChoices: ['أكسيد الحديد (II)', 'كبريتيد الحديد'] },
+            { resultId: 'CuO', name: 'أكسيد النحاس (II)', formula: 'CuO', color: '#000000', reactants: ['Cu', 'O'], wrongChoices: ['كبريتيد النحاس', 'نترات النحاس'] },
+            { resultId: 'ZnS', name: 'كبريتيد الزنك', formula: 'ZnS', color: '#ffffe0', reactants: ['Zn', 'S'], wrongChoices: ['أكسيد الزنك', 'كربونات الزنك'] },
+            { resultId: 'AgCl', name: 'كلوريد الفضة', formula: 'AgCl', color: '#f0f8ff', reactants: ['Ag', 'Cl'], wrongChoices: ['بروميد الفضة', 'يوديد الفضة'] },
+            { resultId: 'AuCl3', name: 'كلوريد الذهب (III)', formula: 'AuCl₃', color: '#ff4500', reactants: ['Au', 'Cl'], wrongChoices: ['أكسيد الذهب', 'كلوريد الفضة'] },
+        ]
+    };
 
-body {
-    font-family: 'Tajawal', sans-serif;
-    background-color: var(--bg-main);
-    color: var(--text-dark);
-    margin: 0;
-    padding: 20px;
-    min-height: 100vh;
-    /* --- إضافة صورة الخلفية --- */
-    background-image: url('lab-bg.jpg');
-    background-size: cover; /* لتغطية كامل الشاشة */
-    background-position: center; /* لتوسيط الصورة */
-    background-attachment: fixed; /* لجعل الخلفية ثابتة عند التمرير */
-}
+    // --- متغيرات حالة اللعبة (تعديل طفيف) ---
+    let currentLevel = 1;
+    let elementsInMixer = [];
+    let currentCompound = null;
+    let availableElements = ['Na', 'Cl', 'H', 'O', 'C', 'K', 'Br', 'Mg', 'Ca', 'Fe', 'Cu', 'Zn', 'Ag', 'Au']; // قائمة بالعناصر المتاحة في كل مرة
+    let discoveredCompounds = []; // لتتبع المركبات التي اكتشفها اللاعب
 
-#game-container {
-    background-color: rgba(255, 255, 255, 0.92); /* خلفية بيضاء شفافة قليلاً */
-    border-radius: 12px;
-    padding: 25px 40px;
-    max-width: 1000px;
-    width: 100%;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* ظل أقوى للبروز فوق الخلفية */
-    border: 1px solid var(--border-color);
-}
+    // --- عناصر واجهة المستخدم (لم يتم تغييرها) ---
+    const $elementsContainer = $('#elements-container');
+    const $mixerTube = $('#mixer-tube');
+    const $mixedResult = $('#mixed-result');
+    const $mixButton = $('#mix-button');
+    const $questionArea = $('#question-area');
+    const $choicesContainer = $('#choices-container');
+    const $senseiSpeech = $('#sensei-speech-bubble');
+    const $levelInfo = $('#level-info');
 
-header {
-    text-align: center;
-    margin-bottom: 25px;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 15px;
-}
+    // --- وظائف مساعدة (تعديل طفيف) ---
+    function updateSenseiMessage(message) {
+        $senseiSpeech.fadeOut(200, function() {
+            $(this).text(message).fadeIn(200);
+        });
+    }
 
-header h1 {
-    margin: 0;
-    font-size: 2.2em;
-    color: var(--primary-blue);
-}
+    // --- التعديل الرئيسي في منطق تحميل المستوى ---
+    function loadGame() {
+        // إعادة تعيين الحالة
+        elementsInMixer = [];
+        currentCompound = null;
+        $mixedResult.css('height', '0%').css('background-color', 'transparent');
+        $mixButton.prop('disabled', true);
+        $questionArea.hide();
+        $elementsContainer.empty();
 
-#level-info {
-    font-size: 1em;
-    color: var(--text-light);
-    margin-top: 5px;
-}
+        // تحديث معلومات المستوى
+        $levelInfo.text(`المركبات المكتشفة: ${discoveredCompounds.length} / ${chemicalData.compounds.length}`);
 
-/* --- التخطيط الرئيسي --- */
-#game-main-area {
-    display: flex;
-    gap: 30px;
-    align-items: flex-start;
-}
+        // تحميل مجموعة من العناصر العشوائية أو الثابتة
+        availableElements.forEach(elementId => {
+            const element = chemicalData.elements.find(e => e.id === elementId);
+            if (element) {
+                const $tube = $(`<div class="element-tube" data-element-id="${element.id}" style="background-color: ${element.color};">
+                                    <div class="element-name">${element.symbol}</div>
+                                 </div>`);
+                $elementsContainer.append($tube);
+            }
+        });
 
-#sensei-area {
-    flex: 1;
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(240, 248, 255, 0.7); /* خلفية شفافة لمنطقة المرشد */
-    border-radius: 10px;
-    border: 1px solid var(--border-color);
-}
+        updateSenseiMessage(`مرحبًا مجددًا! اسحب أي عنصرين إلى منطقة المزج واكتشف تفاعلًا جديدًا.`);
+        initDragAndDrop();
+    }
 
-#play-area {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+    function initDragAndDrop() {
+        $('.element-tube').draggable({
+            revert: 'invalid', zIndex: 1000,
+            start: function(event, ui) { ui.helper.css('transform', 'rotate(5deg)'); },
+            stop: function(event, ui) { ui.helper.css('transform', 'rotate(0deg)'); }
+        });
+        $mixerTube.droppable({
+            accept: '.element-tube',
+            drop: function(event, ui) {
+                const elementId = ui.draggable.data('element-id');
+                if (elementsInMixer.length < 2 && !elementsInMixer.includes(elementId)) {
+                    elementsInMixer.push(elementId); ui.draggable.hide();
+                    const element = chemicalData.elements.find(e => e.id === elementId);
+                    const currentHeight = (elementsInMixer.length) * 50;
+                    $mixedResult.css('height', `${currentHeight}%`);
+                    if (elementsInMixer.length === 1) { $mixedResult.css('background-color', element.color); }
+                    // لا نحدد اللون النهائي هنا، بل ننتظر زر المزج
+                    updateSenseiMessage(`تمت إضافة ${element.name}!`);
+                    if (elementsInMixer.length === 2) { $mixButton.prop('disabled', false); updateSenseiMessage(`ممتاز! الآن اضغط على زر "مزج الآن" لترى النتيجة.`); }
+                } else { updateSenseiMessage(`لقد أضفت هذا العنصر بالفعل أو أن المنطقة ممتلئة!`); }
+            }
+        });
+    }
 
-/* --- منطقة المرشد --- */
-#sensei-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 3px solid var(--primary-blue);
-    margin-bottom: 15px;
-}
+    function showQuestion() {
+        $questionArea.show(); $choicesContainer.empty();
+        const choices = [currentCompound.name, ...currentCompound.wrongChoices]; choices.sort(() => Math.random() - 0.5);
+        choices.forEach(choice => {
+            const $button = $(`<button class="choice-button">${choice}</button>`);
+            $button.on('click', function() { checkAnswer($(this), choice); });
+            $choicesContainer.append($button);
+        });
+        updateSenseiMessage(`واو! لون جديد. ماذا تعتقد أن هذا المركب؟`);
+    }
 
-#sensei-speech-bubble {
-    background-color: var(--bg-white);
-    color: var(--text-dark);
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid var(--primary-blue);
-    font-size: 1em;
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-}
+    // --- التعديل في دالة التحقق من الإجابة ---
+    function checkAnswer($button, selectedAnswer) {
+        $('.choice-button').prop('disabled', true);
 
-/* --- مناطق اللعب --- */
-#elements-area, #mixer-area, #question-area {
-    background-color: rgba(255, 255, 255, 0.8); /* خلفية شفافة */
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: var(--shadow);
-}
+        if (selectedAnswer === currentCompound.name) {
+            $button.addClass('correct');
+            updateSenseiMessage(`مذهل! لقد اكتشفت ${currentCompound.name} (${currentCompound.formula}). أضيف إلى سجل اكتشافاتك!`);
+            
+            // إضافة المركب إلى قائمة المكتشفات إذا لم يكن موجودًا بالفعل
+            if (!discoveredCompounds.includes(currentCompound.resultId)) {
+                discoveredCompounds.push(currentCompound.resultId);
+            }
 
-#elements-area h2, #mixer-area h2, #question-area h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: var(--primary-blue);
-    text-align: center;
-    font-size: 1.3em;
-}
+            setTimeout(() => {
+                // إعادة تحميل اللعبة لاستكشاف المزيد
+                loadGame();
+            }, 3000);
 
-/* --- منطقة التجربة الأفقية --- */
-#experiment-area {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-}
+        } else {
+            $button.addClass('incorrect');
+            updateSenseiMessage(`للأسف، هذه ليست الإجابة الصحيحة. حاول مرة أخرى لمعرفة هذا المركب الغامض.`);
+            setTimeout(() => {
+                // إعادة تحميل نفس التفاعل مرة أخرى
+                $questionArea.hide();
+                loadGame(); // ببساطة أعد تحميل اللعبة للسماح له بالمحاولة مرة أخرى
+            }, 3000);
+        }
+    }
 
-/* --- العناصر (كأنابيب) --- */
-#elements-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* مسافة أكبر بين الأنابيب */
-    align-items: center;
-}
+    // --- التعديل في حدث زر المزج ---
+    $mixButton.on('click', function() {
+        if (elementsInMixer.length === 2) {
+            // البحث عن المركب الذي يتكون من هذين العنصرين
+            const sortedReactants = [...elementsInMixer].sort();
+            currentCompound = chemicalData.compounds.find(c => {
+                return [...c.reactants].sort().every((val, index) => val === sortedReactants[index]);
+            });
 
-.element-tube {
-    width: 70px;
-    height: 150px;
-    cursor: grab;
-    position: relative;
-    user-select: none;
-    transition: transform 0.2s ease-in-out;
-}
+            if (currentCompound) {
+                // إذا كان المزج ناجحًا
+                $mixedResult.css('background-color', currentCompound.color);
+                updateSenseiMessage(`تفاعل ناجح! انظر إلى هذا اللون الرائع.`);
+                $(this).prop('disabled', true);
+                setTimeout(showQuestion, 1500);
+            } else {
+                // إذا لم يكن هناك مركب معرف لهذين العنصرين
+                $mixedResult.css('background-color', '#555555'); // لون رمادي للفشل
+                updateSenseiMessage(`هذان العنصران لا يتحدان لتكوين مركب معروف في معملنا. حاول مزيجًا آخر!`);
+                $(this).prop('disabled', true);
+                setTimeout(() => {
+                    loadGame(); // إعادة تحميل اللعبة
+                }, 2500);
+            }
+        }
+    });
 
-/* --- شكل الأنبوب باستخدام CSS --- */
-.element-tube::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, var(--primary-blue), #0056b3); /* تدرج لوني */
-    border-radius: 0 0 35px 35px; /* قاعدة مستديرة */
-    border: 2px solid #004085; /* حدود داكنة */
-    box-shadow: var(--tube-shadow);
-    z-index: 1;
-}
+    // --- بدء اللعبة ---
+    loadGame(); // استدعاء دالة loadGame بدلاً من loadLevel
 
-/* -- فتحة الأنبوب في الأعلى -- */
-.element-tube::after {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 15px;
-    background: linear-gradient(to bottom, #004085, var(--primary-blue));
-    border-radius: 5px 5px 0 0;
-    border: 2px solid #004085;
-    border-bottom: none;
-    z-index: 0;
-}
-
-.element-tube .element-name {
-    position: absolute;
-    bottom: 15px;
-    left: 0;
-    right: 0;
-    color: var(--bg-white);
-    font-weight: bold;
-    font-size: 1.4em;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* ظل للنص ليظهر بوضوح */
-    z-index: 2; /* ليكون فوق الأنبوب */
-}
-
-.element-tube:hover {
-    transform: translateY(-5px) scale(1.05);
-}
-
-.element-tube.ui-draggable-dragging {
-    cursor: grabbing;
-    transform: rotate(5deg) scale(1.1);
-    z-index: 1000;
-    opacity: 0.9;
-}
-
-/* --- منطقة المزج (كأنبوب كبير) --- */
-#mixer-area {
-    text-align: center;
-    flex-grow: 1;
-}
-
-#mixer-tube {
-    width: 120px;
-    height: 220px;
-    margin: 15px auto;
-    position: relative;
-    cursor: default;
-}
-
-#mixer-tube::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, #e9ecef, #ced4da); /* تدرج رمادي */
-    border-radius: 0 0 50px 50px; /* قاعدة مستديرة أكبر */
-    border: 3px dashed var(--primary-blue); /* حدود متقطعة زرقاء */
-    box-shadow: var(--tube-shadow);
-    z-index: 1;
-}
-
-#mixer-tube::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70px;
-    height: 18px;
-    background: linear-gradient(to bottom, var(--border-color), #e9ecef);
-    border-radius: 8px 8px 0 0;
-    border: 3px dashed var(--primary-blue);
-    border-bottom: none;
-    z-index: 0;
-}
-
-#mixed-result {
-    position: absolute;
-    bottom: 0;
-    left: 10px; /* ترك مساحة للحدود */
-    right: 10px;
-    height: 0%;
-    background: linear-gradient(to top, var(--primary-green), #5cb85c); /* تدرج أخضر عند المزج */
-    border-radius: 0 0 40px 40px; /* يتبع شكل قاعدة الأنبوب */
-    transition: height 0.5s ease-in-out;
-    z-index: 2; /* ليكون فوق الأنبوب الرمادي */
-}
-
-#mixer-tube p {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--text-light);
-    font-size: 0.9em;
-    z-index: 3; /* ليكون فوق كل شيء */
-}
-
-#mix-button {
-    background-color: var(--primary-green);
-    color: var(--bg-white);
-    border: none;
-    padding: 12px 30px;
-    font-size: 1.1em;
-    border-radius: 25px;
-    cursor: pointer;
-    font-family: 'Tajawal', sans-serif;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-#mix-button:hover:not(:disabled) {
-    background-color: #218838;
-    transform: scale(1.05);
-}
-
-#mix-button:disabled {
-    background-color: var(--text-light);
-    cursor: not-allowed;
-    transform: scale(1);
-}
-
-/* --- منطقة السؤال والاختيارات (تبقى كما هي) --- */
-#choices-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.choice-button {
-    background-color: var(--bg-white);
-    color: var(--text-dark);
-    border: 2px solid var(--primary-blue);
-    padding: 12px 25px;
-    font-size: 1em;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: 'Tajawal', sans-serif;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
-}
-
-.choice-button:hover {
-    background-color: var(--primary-blue);
-    color: var(--bg-white);
-    transform: translateY(-2px);
-}
-
-.choice-button.correct {
-    background-color: var(--primary-green);
-    border-color: var(--primary-green);
-    color: var(--bg-white);
-    animation: pulse 0.6s;
-    pointer-events: none;
-}
-
-.choice-button.incorrect {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    color: var(--bg-white);
-    animation: shake 0.5s;
-    pointer-events: none;
-}
-
-/* --- رسوم متحركة --- */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.08); }
-    100% { transform: scale(1); }
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    75% { transform: translateX(8px); }
-}
+});
