@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معمل الكيمياء التفاعلي</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- إضافة مكتبة jQuery من CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- إضافة مكتبة jQuery UI للسحب والإفلات -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+</head>
+<body>
+
+    <div id="game-container">
+        <header>
+            <h1>معمل الكيمياء التفاعلي</h1>
+            <p id="level-info">المستوى: 1 - المزج البسيط</p>
+        </header>
+
+        <main>
+            <!-- منطقة الشخصية الانمي -->
+            <div id="sensei-area">
+                <img src="sensei.png" alt="المرشد الكيميائي" id="sensei-img">
+                <div id="sensei-speech-bubble">
+                    مرحبًا يا كيميائي! اسحب العنصرين إلى منطقة المزج لترى ماذا يحدث.
+                </div>
+            </div>
+
+            <!-- منطقة العناصر المتاحة -->
+            <section id="elements-area">
+                <h2>العناصر المتاحة</h2>
+                <div id="elements-container">
+                    <!-- العناصر ستتم إضافتها هنا بواسطة JavaScript -->
+                </div>
+            </section>
+
+            <!-- منطقة المزج -->
+            <section id="mixer-area">
+                <h2>منطقة المزج</h2>
+                <div id="mixer-tube">
+                    <div id="mixed-result"></div>
+                    <p>اسقط العناصر هنا</p>
+                </div>
+                <button id="mix-button" disabled>مزج الآن!</button>
+            </section>
+
+            <!-- منطقة السؤال والاختيارات -->
+            <section id="question-area" style="display: none;">
+                <h2>ما اسم المركب الناتج؟</h2>
+                <div id="choices-container">
+                    <!-- الخيارات ستتم إضافتها هنا بواسطة JavaScript -->
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ربط ملف الجافاسكريبت -->
+    <script src="script.js"></script>
+</body>
+</html>
